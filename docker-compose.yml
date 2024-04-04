@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: eve_uni
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./postgres/init-scripts:/docker-entrypoint-initdb.d
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+    container_name: eve_uni_container
+
+  web:
+    build: .
+    restart: always
+    ports:
+      - 8085:5000
+    expose:
+      - 5000
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://admin:admin123@db:5432/eve_uni
+    volumes:
+      - .:/app  # Mount the current directory to the app directory
+      - pytest_cache:/root/.pytest_cache
+
+volumes:
+  postgres-data:
+  pytest_cache:

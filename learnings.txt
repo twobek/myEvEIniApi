@@ -1,0 +1,36 @@
+-- DOCKER
+
+to build the containers in my project i use the following command
+
+docker-compose up --build
+
+to shut the server down
+
+docker-compose down
+
+to start only the the docker container with the db inside
+
+docker-compose up -d db
+
+to add new stuff to the container you have to delete the volumes to or the db is not getting initialised
+think of this when there are changes made to the db when a new version is deployed to delete the volumes too
+
+docker-compose down --volume
+
+to run the unittests on the docker container just open another session und connect to the container
+
+docker exec -it <container_id> /bin/bash
+
+the container_id can be retrieved by typing in docker ps
+
+
+
+-- Konsole
+
+um Konsole es zu ermöglichen venv environmeht zu laden
+Set-ExecutionPolicy Unrestricted -Scope Process
+
+start venv -> venv\Scripts\activate
+
+installieren packages auf venv
+pip install --no-cache-dir -r requirements.txt

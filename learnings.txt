@@ -23,6 +23,7 @@ docker exec -it <container_id> /bin/bash
 
 the container_id can be retrieved by typing in docker ps
 
+um stage zu laden muss
 
 
 -- Konsole
@@ -34,3 +35,10 @@ start venv -> venv\Scripts\activate
 
 installieren packages auf venv
 pip install --no-cache-dir -r requirements.txt
+
+-- IntellJ
+wenn ich dei app lokal in intelliJ starten möchte muss ich die Umgebungsvariablen die im docker compose file hinterlegt werden
+auch hier mit übergeben werden
+    environment:
+      FLASK_ENV: development
+      DATABASE_URL: postgresql://admin:admin123@db:5432/eve_uni_dev

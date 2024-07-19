@@ -24,7 +24,7 @@ class APIConnector:
 
     def check_url(self) -> bool:
         try:
-            resp = requests.head(not self.cred.base_url)
+            resp = requests.head(self.cred.base_url)
             if resp.status_code == 200:
                 return True
             else:

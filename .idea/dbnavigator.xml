@@ -34,9 +34,18 @@
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
   </component>
+  <component name="DBNavigator.Project.FileConnectionMappingManager">
+    <mapping file-url="file://$PROJECT_DIR$/postgres/init-scripts/universe_types.sql" connection-id="8ff69bb2-be08-4199-9921-7f30298f94bf" session-id="MAIN" current-schema="eve_uni" />
+    <mapping file-url="file://$PROJECT_DIR$/postgres/init-scripts/universe_types_roh.sql" connection-id="8ff69bb2-be08-4199-9921-7f30298f94bf" session-id="MAIN" current-schema="public" />
+  </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
     <filters />
+  </component>
+  <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
+    <recently-used-interfaces>
+      <mapping database-type="POSTGRES" interface-id="DEFAULT" />
+    </recently-used-interfaces>
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>

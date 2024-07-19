@@ -1,6 +1,7 @@
--- ceates the table to hold the types and their definitions for all the eve types
-
-CREATE TABLE universe_types (
+-- ceates the table to hold the typesIdList and their definitions for all the eve typesIdList
+begin
+set local search_path = 'public'
+CREATE TABLE if not exists universe_types (
     type_id INTEGER PRIMARY KEY,
     capacity FLOAT,
     description TEXT,
@@ -17,7 +18,7 @@ CREATE TABLE universe_types (
     volume FLOAT
 );
 
-CREATE TABLE universe_types_dogma_attributes (
+CREATE TABLE if not exists universe_types_dogma_attributes (
     type_id INTEGER NOT NULL,
     attribute_id INTEGER NOT NULL,
     value FLOAT NOT NULL,
@@ -25,7 +26,7 @@ CREATE TABLE universe_types_dogma_attributes (
     FOREIGN KEY (type_id) REFERENCES universe_types (type_id)
 );
 
-CREATE TABLE universe_types_dogma_effects (
+CREATE TABLE if not exists universe_types_dogma_effects (
     type_id INTEGER NOT NULL,
     effect_id INTEGER NOT NULL,
     is_default BOOLEAN NOT NULL,
@@ -34,8 +35,10 @@ CREATE TABLE universe_types_dogma_effects (
 );
 
 -- Index for the name field
-CREATE INDEX idx_universe_types_name ON universe_types (name);
+CREATE INDEX if not exists idx_universe_types_name ON universe_types (name);
 
 -- Index for the group_id field
-CREATE INDEX idx_universe_types_group_id ON universe_types (group_id);
+CREATE INDEX if not exists idx_universe_types_group_id ON universe_types (group_id);
+
+commit;
 

@@ -7,12 +7,12 @@ services:
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin123
-      POSTGRES_DB: eve_uni_dev
+      POSTGRES_DB: eve_uni_stage
     volumes:
       - postgres_data_dev:/var/lib/postgresql/data
       - ./postgres/init-scripts:/docker-entrypoint-initdb.d
     ports:
-      - 5432:5432
+      - 5433:5432
     expose:
       - 5432
     container_name: eve_uni_dev_container
@@ -21,18 +21,18 @@ services:
     build: .
     restart: always
     ports:
-      - 8085:5000
+      - 8086:5000
     expose:
       - 5000
     depends_on:
       - db
     environment:
       FLASK_ENV: development
-      DATABASE_URL: postgresql://admin:admin123@db:5432/eve_uni_dev
+      DATABASE_URL: postgresql://admin:admin123@db:5433/eve_uni_stage
     volumes:
       - .:/app  # Mount the current directory to the app directory
       - pytest_cache:/root/.pytest_cache
 
 volumes:
-  postgres_data_dev:
+  postgres_data_stage:
   pytest_cache:

@@ -23,7 +23,7 @@ docker exec -it <container_id> /bin/bash
 
 the container_id can be retrieved by typing in docker ps
 
-um stage zu laden muss
+um stage zu laden muss -> docker-compose -f docker-compose.staging.yml up
 
 
 -- Konsole

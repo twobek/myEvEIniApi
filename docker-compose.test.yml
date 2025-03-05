@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  db_test:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: eve_uni_test
+    volumes:
+      - postgres_data_test:/var/lib/postgresql/data
+    ports:
+      - 5433:5432  # Nutze 5433, damit du parallel mit einer lokalen DB arbeiten kannst
+    expose:
+      - 5432
+    container_name: eve_uni_test_container
+
+  web_test:
+    build: .
+    restart: always
+    ports:
+      - 8086:5000
+    expose:
+      - 5000
+    depends_on:
+      - db_test
+    environment:
+      FLASK_ENV: test
+      EVE_APP_ENV: test
+      DATABASE_URL: postgresql://admin:admin123@db_test:5432/eve_uni_test
+    volumes:
+      - .:/app  # Mount den Code ins Containerverzeichnis
+      - pytest_cache:/root/.pytest_cache
+
+volumes:
+  postgres_data_test:
+  pytest_cache:

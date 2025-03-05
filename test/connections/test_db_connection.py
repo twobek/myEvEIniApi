@@ -14,7 +14,7 @@ für locale Entwicklung umstellen des dbObj von Test zu Dev
 class TestDBConnection(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.env = os.getenv('EVE_APP_ENV', 'dev')
+        self.env = os.getenv('FLASK_ENV', 'dev')
         if self.env == 'test':
             self.dbCredTrue = dbconfig.PostgresTest().db_cred
         elif self.env == 'dev':

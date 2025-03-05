@@ -6,7 +6,7 @@ from src.config import dbconfig
 class TestPostgresIntegration(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.env = os.getenv('EVE_APP_ENV', 'dev')
+        self.env = os.getenv('FLASK_ENV', 'dev')
         if self.env == 'test':
             self.dbObj = dbconfig.PostgresTest()
         elif self.env == 'dev':

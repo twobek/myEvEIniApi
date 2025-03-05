@@ -1,23 +1,23 @@
 version: '3'
 
 services:
-  db:
-    image: postgres:latest
+  db_stage:
+    image: postgres:17.2
     restart: always
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin123
       POSTGRES_DB: eve_uni_stage
     volumes:
-      - postgres_data_dev:/var/lib/postgresql/data
+      - postgres_data_stage:/var/lib/postgresql/data
       - ./postgres/init-scripts:/docker-entrypoint-initdb.d
     ports:
       - 5433:5432
     expose:
       - 5432
-    container_name: eve_uni_dev_container
+    container_name: eve_uni_staging
 
-  web:
+  web_stage:
     build: .
     restart: always
     ports:
@@ -25,9 +25,9 @@ services:
     expose:
       - 5000
     depends_on:
-      - db
+      - db_stage
     environment:
-      FLASK_ENV: development
+      FLASK_ENV: test
       DATABASE_URL: postgresql://admin:admin123@db:5433/eve_uni_stage
     volumes:
       - .:/app  # Mount the current directory to the app directory

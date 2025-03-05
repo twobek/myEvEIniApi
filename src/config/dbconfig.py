@@ -5,7 +5,7 @@ import os
 class PostgresTest:
 
     def __init__(self):
-        self.db_cred = DB_Credential(host='db', port=5432, user='admin', password='admin123', database='eve_uni_dev')
+        self.db_cred = DB_Credential(host='db', port=5433, user='admin', password='admin123', database='eve_uni_stage')
         self.db_obj = DB_Connection(self.db_cred)
 
 class PostgresDev:
@@ -16,25 +16,25 @@ class PostgresDev:
 class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-class DevelopmentConfig(Config):
+class DevConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = "sqlite:///mydatabase.db"
 
-class StagingConfig(Config):
+class StageConfig(Config):
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
 
-class ProductionConfig(Config):
+class ProdConfig(Config):
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
 
-class TestingConfig(Config):
+class TestConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
 
 config_by_name = {
-    'development': DevelopmentConfig,
-    'staging': StagingConfig,
-    'production': ProductionConfig,
-    'testing': TestingConfig
+    'dev': DevConfig,
+    'stage': StageConfig,
+    'prod': ProdConfig,
+    'test': TestConfig
 }

@@ -61,7 +61,7 @@
           <description value="eve_uni postgres container" />
           <database-type value="POSTGRES" />
           <config-type value="BASIC" />
-          <database-version value="15.3" />
+          <database-version value="17.2" />
           <driver-source value="BUNDLED" />
           <driver-library value="" />
           <driver value="" />

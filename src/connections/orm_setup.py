@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from contextlib import contextmanager
 
 import src.config.dbconfig
-from src.models.universe_types import universeTypeIds
+from src.models.universe_types_roh import universeTypeIds
 from src.config import dbconfig
 
 

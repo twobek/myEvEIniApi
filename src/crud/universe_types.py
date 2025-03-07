@@ -1,6 +1,7 @@
+from src import db
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
-from src.models.universe_types import UniverseTypesROH
+from src.models.universe_types_roh import UniverseTypesROH
 
 def get_all_types(db: Session):
     return db.query(UniverseTypesROH).all()
@@ -58,3 +59,17 @@ def merge_whole_page(db: Session, type_id_list: list, page: int) -> None:
 
     except Exception as e:
         raise e
+
+def insert_universe_types(type_ids):
+    """Insert new type IDs into the database if they do not exist."""
+    new_entries = []
+
+    for type_id in type_ids:
+        exists = db.session.query(UniverseTypesROH).filter_by(type_id=type_id).first()
+
+        if not exists:
+            new_entries.append(UniverseTypesROH(type_id=type_id))
+
+    if new_entries:
+        db.session.bulk_save_objects(new_entries)  # Efficient bulk insert
+        db.session.commit()

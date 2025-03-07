@@ -2,7 +2,7 @@ import pytest
 
 from sqlalchemy import inspect
 from src import db
-from src.models.universe_types import UniverseTypesROH
+from src.models.universe_types_roh import UniverseTypesROH
 
 table = "universe_types_roh"
 # ✅ Use db_session from conftest.py to handle test DB setup and teardown
@@ -20,13 +20,10 @@ def test_table_columns():
 
     assert "type_id" in column_names
     assert "creation_ts" in column_names
-    assert "api_page" in column_names
 
     # ✅ Check column types
     assert column_names["type_id"]["type"].__class__.__name__ == "INTEGER"
     assert column_names["creation_ts"]["type"].__class__.__name__ == "DATE"
-    assert column_names["api_page"]["type"].__class__.__name__ == "INTEGER"
-
 @pytest.mark.usefixtures("db_session")
 def test_primary_keys():
     inspector = inspect(db.engine)
@@ -59,7 +56,7 @@ def test_universe_type_creation(app, db_session):
     with app.app_context():
         # Create a new UniverseTypesROH instance
         new_date = date.today()
-        new_type = UniverseTypesROH(type_id=1, creation_ts=new_date, api_page=5)
+        new_type = UniverseTypesROH(type_id=1, creation_ts=new_date)
         db_session.add(new_type)
         db_session.commit()
 
@@ -69,7 +66,6 @@ def test_universe_type_creation(app, db_session):
         # Assertions
         assert retrieved is not None
         assert retrieved.type_id == 1
-        assert retrieved.api_page == 5
         assert retrieved.creation_ts == new_date
 
         db_session.delete(new_type)

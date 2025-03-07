@@ -3,7 +3,7 @@ import os
 
 from sqlalchemy import inspect
 from src import db
-from src.models.universe_types import Param
+from src.models.table_parameters import Param
 
 table = "param"
 # ✅ Use db_session from conftest.py to handle test DB setup and teardown
@@ -25,7 +25,7 @@ def test_table_columns():
     assert "date" in column_names
 
     # ✅ Check column types
-    assert column_names["type"]["type"].__class__.__name__ == "STRING"
+    assert column_names["type"]["type"].__class__.__name__ == "VARCHAR"
     assert column_names["text"]["type"].__class__.__name__ == "TEXT"
     assert column_names["number"]["type"].__class__.__name__ == "INTEGER"
     assert column_names["date"]["type"].__class__.__name__ == "DATE"

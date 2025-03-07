@@ -5,3 +5,8 @@ create table if not exists param
       ,param_date date
       )
 ;
+
+insert into param
+      (param_type)
+values('LAST_TYPE_IMPORT')
+;

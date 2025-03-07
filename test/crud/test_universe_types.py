@@ -1,5 +1,5 @@
 from test.config.test_db_config import test_client
-from src.models.universe_types import UniverseTypesROH
+from src.models.universe_types_roh import UniverseTypesROH
 from src.crud.universe_types import merge_type, merge_whole_page
 
 def test_merge_type_insert(test_client):
